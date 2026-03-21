@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Outfit Hub - Fashion Affiliate Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f8f9fa" width="1200" height="600"/><path fill="%23e9ecef" d="M0 300Q150 200 300 250T600 200T900 250T1200 200V600H0Z"/><path fill="%23dee2e6" d="M0 400Q200 300 400 350T800 300T1200 350V600H0Z"/></svg>');
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* Product Grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(45deg, #f0f2f5, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #adb5bd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '👗';
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .product-image.kids::before { content: '👶'; }
+        .product-image.bodycon::before { content: '👗'; }
+        .product-image.jewels::before { content: '💎'; }
+        .product-image.denim::before { content: '👖'; }
+        .product-image.footwear::before { content: '👟'; }
+        .product-image.nail::before { content: '💅'; }
+        .product-image.mens::before { content: '👔'; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.3rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .products {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 60px 1rem;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+            .product-image::before {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#summer">Summer Outfit</a></li>
+            <li><a href="#kids">Kids Section</a></li>
+            <li><a href="#bodycon">Stylish Bodycon</a></li>
+            <li><a href="#jewels">Pretty in Jewels</a></li>
+            <li><a href="#denim">Denim Diaries</a></li>
+            <li><a href="#footwear">Footwear</a></li>
+            <li><a href="#nail">Nail Art Inspo</a></li>
+            <li><a href="#mens">Men's Style</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div>
+            <h1>Modern Outfit Hub</h1>
+            <p>Discover the latest fashion trends with our curated collection of stylish outfits, accessories, and more. Shop now and elevate your style!</p>
+        </div>
+    </div>
+
+    <!-- Summer Outfit Section -->
+    <section id="summer">
+        <h2 class="section-title">Summer Outfit</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Floral Maxi Dress</h3>
+                    <div class="product-price">$49.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Linen Crop Top</h3>
+                    <div class="product-price">$29.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <h3 class="product-title">High Waist Shorts</h3>
+                    <div class="product-price">$34.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kids Section -->
+    <section id="kids">
+        <h2 class="section-title">Kids Section</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image kids"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Dinosaur T-Shirt</h3>
+                    <div class="product-price">$19.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image kids"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Princess Dress</h3>
+                    <div class="product-price">$39.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image kids"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Colorful Sneakers</h3>
+                    <div class="product-price">$24.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stylish Bodycon -->
+    <section id="bodycon">
+        <h2 class="section-title">Stylish Bodycon</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image bodycon"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Red Bodycon Dress</h3>
+                    <div class="product-price">$44.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image bodycon"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Black Midi Dress</h3>
+                    <div class="product-price">$49.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image bodycon"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Leopard Print Dress</h3>
+                    <div class="product-price">$39.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pretty in Jewels -->
+    <section id="jewels">
+        <h2 class="section-title">Pretty in Jewels</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image jewels"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Gold Hoop Earrings</h3>
+                    <div class="product-price">$29.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image jewels"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Crystal Necklace</h3>
+                    <div class="product-price">$59.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image jewels"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Pearl Bracelet Set</h3>
+                    <div class="product-price">$34.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Denim Diaries -->
+    <section id="denim">
+        <h2 class="section-title">Denim Diaries</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image denim"></div>
+                <div class="product-info">
+                    <h3 class="product-title">High Waist Jeans</h3>
+                    <div class="product-price">$54.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image denim"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Denim Jacket</h3>
+                    <div class="product-price">$69.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image denim"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Denim Skirt</h3>
+                    <div class="product-price">$39.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footwear -->
+    <section id="footwear">
+        <h2 class="section-title">Footwear</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image footwear"></div>
+                <div class="product-info">
+                    <h3 class="product-title">White Sneakers</h3>
+                    <div class="product-price">$79.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image footwear"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Heeled Sandals</h3>
+                    <div class="product-price">$49.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image footwear"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Loafers</h3>
+                    <div class="product-price">$89.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nail Art Inspo -->
+    <section id="nail">
+        <h2 class="section-title">Nail Art Inspo</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image nail"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Glitter Nail Kit</h3>
+                    <div class="product-price">$24.99</div>
+                    <a href="https://pin.it/463bTwYXP" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
